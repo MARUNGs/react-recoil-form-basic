@@ -29,14 +29,6 @@ export default function Country() {
   const [went, setWent] = useRecoilState(wentCountry);
   const [favorite, setFavorite] = useRecoilState(favoriteCountries);
 
-  // localStorage에서 가져온 값이 null이 아닐 때만 JSON.parse()를 사용
-  // const storageCountries = localStorage.getItem("countries");
-  // const storageWent = localStorage.getItem("wet");
-  // const storageFavorite = localStorage.getItem("favorite");
-  // const countryList = storageCountries ? JSON.parse(storageCountries) : [];
-  // const wentList = storageWent ? JSON.parse(storageWent) : [];
-  // const favoriteList = storageFavorite ? JSON.parse(storageFavorite) : [];
-
   // function
   const onSubmit = (data: DataType) => {
     const { name } = data;
@@ -100,17 +92,9 @@ export default function Country() {
     const storedWent = localStorage.getItem("went");
     const storedFavorite = localStorage.getItem("favorite");
 
-    if (storedCountries) {
-      setCountries(JSON.parse(storedCountries));
-    }
-
-    if (storedWent) {
-      setWent(JSON.parse(storedWent));
-    }
-
-    if (storedFavorite) {
-      setFavorite(JSON.parse(storedFavorite));
-    }
+    storedCountries && setCountries(JSON.parse(storedCountries));
+    storedWent && setWent(JSON.parse(storedWent));
+    storedFavorite && setFavorite(JSON.parse(storedFavorite));
   }, []);
 
   // list 값이 변경될때마다 localStorage에 저장한다.
